@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a50642c43634b229f058dc7e06372d4" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_MyonlinetaxinewoneModel.Admin" Width="1.5" PointX="4.25" PointY="0.875" />
+        <EntityTypeShape EntityType="DB_MyonlinetaxinewoneModel.Customer" Width="1.5" PointX="2.125" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_MyonlinetaxinewoneModel.Category" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="DB_MyonlinetaxinewoneModel.Product" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="DB_MyonlinetaxinewoneModel.FK_Product_Category" />
+        <EntityTypeShape EntityType="DB_MyonlinetaxinewoneModel.Booking" Width="1.5" PointX="5.25" PointY="5.25" />
+        <AssociationConnector Association="DB_MyonlinetaxinewoneModel.FK_Booking_Product" />
+        <EntityTypeShape EntityType="DB_MyonlinetaxinewoneModel.contact" Width="1.5" PointX="6.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

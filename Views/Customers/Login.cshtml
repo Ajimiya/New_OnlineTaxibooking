@@ -1,0 +1,44 @@
+﻿@model IEnumerable<New_OnlineTaxibooking.DAL.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Customers"))
+{
+    @Html.AntiForgeryToken()
+
+    <br />
+    <br />
+    <br />
+
+    <div class="container" style="align-items:center">
+
+
+        <div class="form-container" style=" background-color: white; border-radius: 10px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); padding: 20px; width: 400px;">
+            <h4>Sign In</h4>
+            <form>
+                <label for="exampleInputEmail1" class="form-label" style="display: block; margin-bottom: 5px; font-weight: bold;">Email address</label>
+                <input type="email" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;" id="exampleInputEmail1" aria-describedby="emailHelp" name="Customer_Email">
+                <div class="form-text" style="font-size: 12px; color: #666;">We'll never share your email with anyone else.</div>
+
+                <label for="exampleInputPassword1" class="form-label" style="display: block; margin-bottom: 5px; font-weight: bold;">Password</label>
+                <input type="password" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px;" id="exampleInputPassword1" name="Customer_Password">
+
+                <button type="submit" class="btn btn-danger" value="Log In">Log In</button><br /><br />
+                <div class="signup-link">
+                      @Html.ActionLink("if you are not a user Register ", "Signup")
+                                                                                                
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+}

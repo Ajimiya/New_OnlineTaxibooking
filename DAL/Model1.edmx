@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_MyonlinetaxinewoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_Id" />
+          </Key>
+          <Property Name="Admin_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BK_Id" />
+          </Key>
+          <Property Name="BK_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cust_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cust_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Book_Date" Type="date" Nullable="false" />
+          <Property Name="Prod_bid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Cat_Id" />
+          </Key>
+          <Property Name="Cat_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cat_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="Contact_Id" />
+          </Key>
+          <Property Name="Contact_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cust_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cust_email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cust_no" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customer_Id" />
+          </Key>
+          <Property Name="Customer_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer_Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer_Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Prod_Id" />
+          </Key>
+          <Property Name="Prod_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prod_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prod_Disc" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prod_Pic" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cat_Fid" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Booking_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Prod_Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="Prod_bid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Cat_Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Cat_Fid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_MyonlinetaxinewoneModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Booking_Product" Association="Self.FK_Booking_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_MyonlinetaxinewoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB_MyonlinetaxinewoneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="DB_MyonlinetaxinewoneModel.Admin" />
+          <EntitySet Name="Customers" EntityType="DB_MyonlinetaxinewoneModel.Customer" />
+          <EntitySet Name="Categories" EntityType="DB_MyonlinetaxinewoneModel.Category" />
+          <EntitySet Name="Products" EntityType="DB_MyonlinetaxinewoneModel.Product" />
+          <AssociationSet Name="FK_Product_Category" Association="DB_MyonlinetaxinewoneModel.FK_Product_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Bookings" EntityType="DB_MyonlinetaxinewoneModel.Booking" />
+          <AssociationSet Name="FK_Booking_Product" Association="DB_MyonlinetaxinewoneModel.FK_Booking_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <EntitySet Name="contacts" EntityType="DB_MyonlinetaxinewoneModel.contact" />
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_Id" />
+          </Key>
+          <Property Name="Admin_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customer_Id" />
+          </Key>
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Cat_Id" />
+          </Key>
+          <Property Name="Cat_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cat_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="DB_MyonlinetaxinewoneModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Prod_Id" />
+          </Key>
+          <Property Name="Prod_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prod_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prod_Disc" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prod_Pic" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_Fid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="DB_MyonlinetaxinewoneModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Bookings" Relationship="DB_MyonlinetaxinewoneModel.FK_Booking_Product" FromRole="Product" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK_Product_Category">
+          <End Type="DB_MyonlinetaxinewoneModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="DB_MyonlinetaxinewoneModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Cat_Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Cat_Fid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BK_Id" />
+          </Key>
+          <Property Name="BK_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cust_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Book_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Prod_bid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="DB_MyonlinetaxinewoneModel.FK_Booking_Product" FromRole="Booking" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Booking_Product">
+          <End Type="DB_MyonlinetaxinewoneModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DB_MyonlinetaxinewoneModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Prod_Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="Prod_bid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="Contact_Id" />
+          </Key>
+          <Property Name="Contact_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cust_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cust_email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cust_no" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_MyonlinetaxinewoneModelStoreContainer" CdmEntityContainer="DB_MyonlinetaxinewoneEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DB_MyonlinetaxinewoneModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Admin_Password" ColumnName="Admin_Password" />
+                <ScalarProperty Name="Admin_Email" ColumnName="Admin_Email" />
+                <ScalarProperty Name="Admin_Id" ColumnName="Admin_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DB_MyonlinetaxinewoneModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Customer_Address" ColumnName="Customer_Address" />
+                <ScalarProperty Name="Customer_Contact" ColumnName="Customer_Contact" />
+                <ScalarProperty Name="Customer_Password" ColumnName="Customer_Password" />
+                <ScalarProperty Name="Customer_Email" ColumnName="Customer_Email" />
+                <ScalarProperty Name="Customer_LastName" ColumnName="Customer_LastName" />
+                <ScalarProperty Name="Customer_FirstName" ColumnName="Customer_FirstName" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DB_MyonlinetaxinewoneModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Cat_Name" ColumnName="Cat_Name" />
+                <ScalarProperty Name="Cat_Id" ColumnName="Cat_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DB_MyonlinetaxinewoneModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Cat_Fid" ColumnName="Cat_Fid" />
+                <ScalarProperty Name="Prod_Pic" ColumnName="Prod_Pic" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Prod_Disc" ColumnName="Prod_Disc" />
+                <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
+                <ScalarProperty Name="Prod_Id" ColumnName="Prod_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="DB_MyonlinetaxinewoneModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="Prod_bid" ColumnName="Prod_bid" />
+                <ScalarProperty Name="Book_Date" ColumnName="Book_Date" />
+                <ScalarProperty Name="Cust_no" ColumnName="Cust_no" />
+                <ScalarProperty Name="Cust_name" ColumnName="Cust_name" />
+                <ScalarProperty Name="BK_Id" ColumnName="BK_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contacts">
+            <EntityTypeMapping TypeName="DB_MyonlinetaxinewoneModel.contact">
+              <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Cust_no" ColumnName="Cust_no" />
+                <ScalarProperty Name="Cust_email" ColumnName="Cust_email" />
+                <ScalarProperty Name="Cust_name" ColumnName="Cust_name" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

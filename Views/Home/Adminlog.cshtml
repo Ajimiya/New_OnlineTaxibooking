@@ -1,0 +1,41 @@
+﻿
+@model New_OnlineTaxibooking.DAL.Admin
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()<br /><br />
+
+    <div class="form-horizontal" style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px; background-color: #f9f9f9;">
+        <h2 style="text-align: center; margin-bottom: 20px; font-weight: bold; color:crimson">Admin Login</h2><br />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            @Html.LabelFor(model => model.Admin_Email, htmlAttributes: new { @class = "control-label", style = "font-weight: bold; color: #555;" })
+            <div>
+                @Html.EditorFor(model => model.Admin_Email, new { htmlAttributes = new { @class = "form-control", style = "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px;" } })
+                @Html.ValidationMessageFor(model => model.Admin_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            @Html.LabelFor(model => model.Admin_Password, htmlAttributes: new { @class = "control-label", style = "font-weight: bold; color: #555;" })
+            <div>
+                @Html.EditorFor(model => model.Admin_Password, new { htmlAttributes = new { @class = "form-control", style = "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 3px;" } })
+                @Html.ValidationMessageFor(model => model.Admin_Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="text-align: center;">
+            <div>
+                <input type="submit" value="Login" class="btn btn-danger" style="padding: 8px 20px; border: none; border-radius: 3px; cursor: pointer;background-color:crimson" />
+            </div>
+        </div>
+    </div>
+}
+
+<div style="text-align: center; margin-top: 20px;">
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-danger" })
+</div>
