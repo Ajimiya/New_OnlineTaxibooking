@@ -43,8 +43,12 @@
                                 <a class="nav-link" href="@Url.Action("about","Home")">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Products","Home")">Taxi book </a>
-                            </li>
+                                @if (Session["ID"] != null)
+                                {
+
+                                   <a class="nav-link" href="@Url.Action("Products", "Home")">Taxi book </a>
+                                }
+                                </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Gallery","Home")">Gallery</a>
                             </li>
@@ -115,16 +119,31 @@
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>
         </form>*@
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-danger" href="@Url.Action("Signup","Customers")">Register</a>
-                            </li>&nbsp;&nbsp;
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-outline-danger" href="@Url.Action("Login","Customers")">Login</a>
+                            @*<li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Log In <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link btn btn-outline-danger" href=@Url.Action("Adminlog","Home")>Admin</a></li>
+                                    <li><a class="nav-link btn btn-outline-danger" href=@Url.Action("Login","Customers")>Users</a></li>
+                                </ul>
+                            </li>*@
+                            @*<li class="nav-item">
+            <a class="nav-link btn btn-outline-danger" href="@Url.Action("Signup","Customers")">Register</a>
+        </li>&nbsp;&nbsp;*@
+                        <li class="nav-item">
+                           
+                                <a class="nav-link btn btn-outline-danger" href="@Url.Action("Login", "Customers")">Login</a>
+                         
                             </li>&nbsp;&nbsp;
                             <li class="nav-item">
                                 <a class="nav-link btn btn-outline-danger" href="@Url.Action("Adminlog","Home")">Adminlog</a>
                             </li>&nbsp;&nbsp;
-
+                            <li class="nav-item">
+                                @if (Session["ID"] != null)
+                                {
+                                    <a class="nav-link" href="@Url.Action("Logout","Customers")">Logout</a>
+                                    @*<b>@HttpContext.Current.User.Identity.Name</b>*@
+                                }
+                            </li>
                         </ul>
                     </div>
                 </nav>

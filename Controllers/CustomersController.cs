@@ -34,15 +34,36 @@ namespace New_OnlineTaxibooking.Controllers
         [HttpPost]
         public ActionResult Login(Customer c)
         {
-           int res= db.Customers.Where(x=>x.Customer_Email==c.Customer_Email&& x.Customer_Password==c.Customer_Password).Count();
-           if(res==1)
+            //int res= db.Customers.Where(x=>x.Customer_Email==c.Customer_Email&& x.Customer_Password==c.Customer_Password).Count();
+            //if(res==1)
+            // {
+            //     return RedirectToAction("Index", "Home");
+            // }
+            //else
+            // {
+            //     return View();
+            // }
+            var cust = db.Customers.Where(x => x.Customer_Email == c.Customer_Email && x.Customer_Password == c.Customer_Password).Count();
+            var id = db.Customers.Where(x => x.Customer_Email == c.Customer_Email && x.Customer_Password == c.Customer_Password).Select(v => v.Customer_Id).FirstOrDefault();
+            var idd = db.Customers.FirstOrDefault(x => x.Customer_Email == c.Customer_Email && x.Customer_Password == c.Customer_Password);
+            Session["CID"] = id;
+            Session["CIDD"] = idd;
+            if (cust > 0)
             {
+                Session["ID"] = cust;
+                //Response.Write("<script>alert('Invalid Username/Password'); </script>");
                 return RedirectToAction("Index", "Home");
             }
-           else
+            else
             {
+
                 return View();
             }
+        }
+        public ActionResult Logout()
+        {
+            Session["ID"] = null;
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Customers/Details/5
